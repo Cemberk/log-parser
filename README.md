@@ -11,3 +11,9 @@ A simple configurable text based file parser written in python
   * Fields output in CSV are configurable.
   * Information can be grabbed from file path (in cases such as date, workstation etc.) and each line in the file.
   * Supports output of mutliple search results from the file to be output in CSV.
+
+## Usage
+```bash
+   log-parser.py <path_to_config_file>
+   log-parser.py sample.cfg
+```
