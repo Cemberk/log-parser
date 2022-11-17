@@ -89,7 +89,7 @@ class filters(object):
         
 class logParser(object):
     def __init__(self, cfg_path):
-        self.config = ConfigParser.ConfigParser()
+        self.config = configparser.ConfigParser()
         self.config.read(cfg_path)
         self.starttime = time.strftime("%Y%m%d-%H%M%S")
         self.reportname  = '%s_%s.csv' % (self.config.get('DEFAULTS','report_prefix'), self.starttime)
@@ -102,12 +102,12 @@ class logParser(object):
         self.startTime = time.time()
         
     def writeHeader(self):
-        self.csvfile = open(self.reportname, 'wb')
+        self.csvfile = open(self.reportname, 'w')
         self.writer  = csv.DictWriter(self.csvfile, fieldnames=['Filename','CTime'] + self.config.options('pathfields') + self.config.options('fields') + ['Line', 'Key', 'Value', 'FullPath'])
         self.writer.writeheader()
         
     def writeRows(self, rows):
-        self.writer.writerows(rows)
+        self.writer.writerows(rows.encode(encoding='UTF-8'))
         
     def doParse(self):
         print(time.asctime(), "Start Parsing...")
