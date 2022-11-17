@@ -33,7 +33,7 @@ import csv
 import time
 import sys
 import os.path
-import ConfigParser
+import configparser
 
 __version__ = 0.7
 
@@ -115,7 +115,7 @@ class logParser(object):
             #print filepath
             self.filesFound+=1
             if self.filters.applyFilter(filepath):
-                print filepath
+                print(filepath)
                 self.filesParsed+=1
                 output = {}
                 rowsout = []
