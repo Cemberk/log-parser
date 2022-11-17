@@ -110,7 +110,7 @@ class logParser(object):
         self.writer.writerows(rows)
         
     def doParse(self):
-        print time.asctime(), "Start Parsing..."
+        print(time.asctime(), "Start Parsing...")
         for filepath in glob.iglob(self.config.get('DEFAULTS','filepattern')):
             #print filepath
             self.filesFound+=1
@@ -135,7 +135,7 @@ class logParser(object):
                             output['Key'] = field
                             output['Value'] = match.group(1)
                             rowsout.append(output.copy())
-                            print "\t", field, ":", match.group(1)
+                            print("\t", field, ":", match.group(1))
                 if rowsout:
                     self.filesOutput+=1
                     self.writeRows(rowsout)
@@ -143,18 +143,18 @@ class logParser(object):
                     self.filesOutput+=1
                     self.writer.writerow(output)
 
-        print "\nDone creating %s at %s" % (self.reportname, time.asctime())
+        print("\nDone creating %s at %s" % (self.reportname, time.asctime()))
         self.__writeSummary()
         
     def __writeSummary(self):
-        print "=" * 60
-        print "Total Files Found\t:", self.filesFound
-        print "Total Files Parsed\t:", self.filesParsed
-        print "Total Files Output\t:", self.filesOutput
+        print("=" * 60)
+        print("Total Files Found\t:", self.filesFound)
+        print("Total Files Parsed\t:", self.filesParsed)
+        print("Total Files Output\t:", self.filesOutput)
         m,s = divmod(time.time() - self.startTime, 60)
         h,m = divmod(m, 60)
-        print "Total time taken\t: %02d Hrs %02d Mins %02d Secs" % (h, m, s)
-        print "=" * 60
+        print("Total time taken\t: %02d Hrs %02d Mins %02d Secs" % (h, m, s))
+        print("=" * 60)
         
     def closeReport(self):
         self.csvfile.close()
@@ -166,13 +166,13 @@ def __checkArgs():
     if os.path.isfile(sys.argv[1]):
         return
     else:
-        print "Path not found -", sys.argv[1]
+        print("Path not found -", sys.argv[1])
         __printUsage()
         exit()
         
 def __printUsage():
-    print "Usage : log-parser.py <path_of_config_file>"
-    print "For Eg: log-parser.py appLogs.ini"
+    print("Usage : log-parser.py <path_of_config_file>")
+    print("For Eg: log-parser.py appLogs.ini")
 
 if __name__ == '__main__':
     __checkArgs()
