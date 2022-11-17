@@ -107,7 +107,7 @@ class logParser(object):
         self.writer.writeheader()
         
     def writeRows(self, rows):
-        self.writer.writerows(rows.encode(encoding='UTF-8'))
+        self.writer.writerows(rows) #.encode(encoding='UTF-8'))
         
     def doParse(self):
         print(time.asctime(), "Start Parsing...")
