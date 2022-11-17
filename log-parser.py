@@ -111,8 +111,10 @@ class logParser(object):
         
     def doParse(self):
         print(time.asctime(), "Start Parsing...")
+        #for i in glob.iglob("*.log"):
+        #    print(i)
         for filepath in glob.iglob(self.config.get('DEFAULTS','filepattern')):
-            #print filepath
+            print(filepath)
             self.filesFound+=1
             if self.filters.applyFilter(filepath):
                 print(filepath)
@@ -124,10 +126,10 @@ class logParser(object):
                 output['CTime']   = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.path.getctime(filepath)))
                 for field, pattern in self.config.items('pathfields'):
                     output[field] = "|".join(re.findall(pattern,filepath, re.IGNORECASE))
-                for i, line in enumerate(open(filepath)):
+                for i, line in enumerate(open(filepath, "r")):
                     for field, pattern in self.config.items('fields'):
                         for match in re.finditer(pattern, line, re.IGNORECASE):
-                            #print "\t", field, ":", match.group(1)
+                            print("\t", field, ":", match.group(1))
                             output[field] = ":".join(match.groups())
                     for field, pattern in self.config.items('searches'):
                         for match in re.finditer(pattern, line, re.IGNORECASE):
